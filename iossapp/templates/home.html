@@ -1,20 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %} URL Shortener {% endblock %}
+
+{% block title %}URL Shortener{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2 class="mb-4 text-center">URL Shortener</h2>
-        <form method="POST">
+<div class="container py-5 min-vh-100 d-flex flex-column justify-content-center align-items-center">
+    <div class="card shadow-lg p-5 rounded-4 bg-black text-white w-100" style="max-width:500px;">
+        <h1 class="mb-4 text-center">URL Shortener</h1>
+        <p class="mb-4 text-center">Paste your long URL below to get a short link instantly!</p>
+        <form method="POST" class="mb-3">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="btn btn-primary w-100">Generate Short URL</button>
+            <button type="submit" class="btn btn-warning btn-lg w-100 glow-btn">Generate Short URL</button>
         </form>
         {% if short_url %}
-        <div class="alert alert-success mt-3">
-            Short URL: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+        <div class="short-card mt-4 p-3 rounded-3 bg-dark text-white d-flex justify-content-between align-items-center">
+            <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+            <button class="btn btn-sm btn-outline-light copy-btn" onclick="copyLink()">Copy</button>
         </div>
         {% endif %}
     </div>
 </div>
+
+<script>
+function copyLink() {
+    const copyText = document.querySelector(".short-card a");
+    navigator.clipboard.writeText(copyText.href)
+        .then(() => alert("Copied to clipboard!"))
+        .catch(() => alert("Failed to copy!"));
+}
+</script>
 {% endblock %}

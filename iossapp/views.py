@@ -3,11 +3,16 @@ from .models import URL
 from .form import URLForm
 
 def homepagefn(request):
-    form = URLForm(request.POST or None)
-    short_url = None
-    if form.is_valid():
-        url_obj = form.save()
-        short_url = request.build_absolute_uri(f"/{url_obj.short_code}/")
+    short_url = None  
+    if request.method == 'POST':
+        form = URLForm(request.POST)
+        if form.is_valid():
+            url_obj = form.save()
+            short_url = request.build_absolute_uri(f'/{url_obj.short_code}/')
+            form = URLForm() 
+    else:
+        form = URLForm()
+
     return render(request, 'home.html', {'form': form, 'short_url': short_url})
 
 def short_urlfn(request, short_code):

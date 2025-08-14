@@ -1,0 +1,46 @@
+body {
+    background-color: #000000;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    background: #000000;
+    border: 1px solid #333;
+}
+
+.glow-btn {
+    background-color: #FFD700; 
+    border: none;
+    box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+    transition: 0.3s;
+}
+
+.glow-btn:hover {
+    box-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700;
+}
+
+input {
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 10px #FFD700;
+}
+
+.short-card a {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.copy-btn {
+    font-size: 0.8rem;
+}
